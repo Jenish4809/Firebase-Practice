@@ -15,6 +15,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { StackActions } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -26,6 +27,10 @@ const Login = ({ navigation }) => {
     try {
       if (email.length > 0 && password.length > 0) {
         const user = await signInWithEmailAndPassword(auth, email, password);
+        await AsyncStorage.setItem(
+          "userstore",
+          JSON.stringify(user._tokenResponse.email)
+        );
         if (user.user.emailVerified) {
           navigation.dispatch(StackActions.replace("Details"));
         } else {

@@ -5,18 +5,17 @@ import Login from "./app/Screens/Login";
 import Details from "./app/Screens/Details";
 import SignUp from "./app/Screens/SignUp";
 import SplashScreen from "./app/Screens/SplashScreen";
+import OtpVerify from "./app/Screens/OtpVerify";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen name="OtpVerify" component={OtpVerify} />
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
-
         <Stack.Screen name="Login" component={Login} />
-
         <Stack.Screen name="SignUp" component={SignUp} />
-
         <Stack.Screen name="Details" component={Details} />
         <Stack.Screen name="List" component={List} />
       </Stack.Navigator>

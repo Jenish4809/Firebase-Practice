@@ -25,6 +25,7 @@ const SignUp = ({ navigation }) => {
     try {
       if (email.length > 0 && password.length > 0) {
         await createUserWithEmailAndPassword(auth, email, password);
+
         await sendEmailVerification(auth.currentUser);
         await signOut(auth);
         Alert.alert("Please verify your Email Check out Link In Your Inbox");

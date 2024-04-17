@@ -1,20 +1,17 @@
 import { View, Text, StyleSheet } from "react-native";
 import React, { useEffect } from "react";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { StackActions } from "@react-navigation/native";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const SplashScreen = ({ navigation }) => {
-  const auth = getAuth();
+  const getUser = async () => {
+    const userData = await AsyncStorage.getItem("userstore");
+    const newData = userData;
+    navigation.navigate(newData ? "Details" : "Login");
+  };
   useEffect(() => {
-    setTimeout(() => {
-      onAuthStateChanged(auth, (user) => {
-        const routeName = user !== null ? "Details" : "Login";
-        navigation.dispatch(StackActions.replace(routeName));
-      });
-    }, 3000);
-    return () => {};
+    getUser();
   }, []);
-
   return (
     <View style={styles.main}>
       <Text style={{ fontSize: 20 }}>SplashScreen</Text>
