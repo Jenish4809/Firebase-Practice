@@ -1,24 +1,20 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import List from "./app/Screens/List";
-import Login from "./app/Screens/Login";
-import Details from "./app/Screens/Details";
-import SignUp from "./app/Screens/SignUp";
-import SplashScreen from "./app/Screens/SplashScreen";
-import OtpVerify from "./app/Screens/OtpVerify";
+import ReduxApp from "./app/ReduxApp/ReduxApp";
+import { Provider } from "react-redux";
+import store from "./app/ReduxApp/redux/store";
+import CartUi from "./app/ReduxApp/CartUi";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="OtpVerify" component={OtpVerify} />
-        <Stack.Screen name="SplashScreen" component={SplashScreen} />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="SignUp" component={SignUp} />
-        <Stack.Screen name="Details" component={Details} />
-        <Stack.Screen name="List" component={List} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="ReduxApp" component={ReduxApp} />
+          <Stack.Screen name="CartUi" component={CartUi} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
