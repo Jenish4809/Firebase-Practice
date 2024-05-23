@@ -48,6 +48,16 @@ export default function CartUi() {
       </View>
     );
   };
+
+  const listEmpty = () => {
+    return (
+      <View style={[styles.main1, { backgroundColor: color.darkgray }]}>
+        <Text style={[styles.text, { color: color.backgroundColor }]}>
+          No Data Found
+        </Text>
+      </View>
+    );
+  };
   return (
     <View style={[styles.main, { backgroundColor: color.backgroundColor }]}>
       <View style={styles.innerview}>
@@ -60,7 +70,11 @@ export default function CartUi() {
         />
         <Text style={styles.title}>Cart</Text>
       </View>
-      <FlatList data={cartItems} renderItem={renderData} />
+      <FlatList
+        data={cartItems}
+        renderItem={renderData}
+        ListEmptyComponent={listEmpty}
+      />
     </View>
   );
 }

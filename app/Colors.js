@@ -14,7 +14,7 @@ const Common = {
 
 const DarkColor = {
   dark: "dark",
-  backgroundColor: "#101520",
+  backgroundColor: "#000000",
   GrayScale: "#fff",
   purple: "#9610FF",
   darkgray: "#fff",
