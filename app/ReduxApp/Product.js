@@ -7,6 +7,7 @@ export default function Product(props) {
   const item = props.item;
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.reducer);
+  const color = useSelector((state) => state.theme.theme);
   const [isAdded, setIsAdded] = useState(false);
 
   const handleAddItem = (item) => {
@@ -29,11 +30,20 @@ export default function Product(props) {
   }, [cartItems]);
 
   return (
-    <View style={styles.main}>
-      <Text style={styles.text}>{item.name}</Text>
-      <Text style={styles.text}>{item.color}</Text>
-      <Text style={styles.text}>{item.price}</Text>
-      <Image source={{ uri: item.image }} style={styles.imagesty} />
+    <View style={[styles.main, { backgroundColor: color.darkgray }]}>
+      <Text style={[styles.text, { color: color.backgroundColor }]}>
+        {item.name}
+      </Text>
+      <Text style={[styles.text, { color: color.backgroundColor }]}>
+        {item.color}
+      </Text>
+      <Text style={[styles.text, { color: color.backgroundColor }]}>
+        {item.price}
+      </Text>
+      <Image
+        source={color.light ? item.darkimage : { uri: item.lightimage }}
+        style={styles.imagesty}
+      />
 
       <Button
         title={isAdded ? "Remove from Cart" : "Add to Cart"}

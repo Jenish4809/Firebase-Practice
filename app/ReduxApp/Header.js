@@ -6,14 +6,17 @@ import { useNavigation } from "@react-navigation/native";
 export default function Header() {
   const navigation = useNavigation();
   const cartData = useSelector((state) => state.reducer);
+  const color = useSelector((state) => state.theme.theme);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: color.GrayScale }]}>
       <TouchableOpacity
-        style={styles.cartview}
+        style={[styles.cartview, { backgroundColor: color.purple }]}
         onPress={() => navigation.navigate("CartUi")}
       >
-        <Text style={styles.text}>{cartData.length}</Text>
+        <Text style={[styles.text, { color: color.GrayScale }]}>
+          {cartData.length}
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -21,7 +24,6 @@ export default function Header() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "orange",
     alignItems: "flex-end",
     padding: 10,
   },
@@ -30,7 +32,6 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
   cartview: {
-    backgroundColor: "white",
     borderRadius: 50,
   },
 });
