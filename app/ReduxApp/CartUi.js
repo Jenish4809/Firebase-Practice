@@ -32,19 +32,10 @@ export default function CartUi() {
   const renderData = ({ item }) => {
     return (
       <View style={[styles.main1, { backgroundColor: color.darkgray }]}>
-        <Text style={[styles.text, { color: color.backgroundColor }]}>
-          {item.name}
-        </Text>
-        <Text style={[styles.text, { color: color.backgroundColor }]}>
-          {item.color}
-        </Text>
-        <Text style={[styles.text, { color: color.backgroundColor }]}>
-          {item.price}
-        </Text>
-        <Image
-          source={color.light ? item.darkimage : { uri: item.lightimage }}
-          style={styles.imagesty}
-        />
+        <Text style={[styles.text, { color: color.backgroundColor }]}>{item.name}</Text>
+        <Text style={[styles.text, { color: color.backgroundColor }]}>{item.color}</Text>
+        <Text style={[styles.text, { color: color.backgroundColor }]}>{item.price}</Text>
+        <Image source={color.light ? item.darkimage : { uri: item.lightimage }} style={styles.imagesty} />
       </View>
     );
   };
@@ -52,9 +43,7 @@ export default function CartUi() {
   const listEmpty = () => {
     return (
       <View style={[styles.main1, { backgroundColor: color.darkgray }]}>
-        <Text style={[styles.text, { color: color.backgroundColor }]}>
-          No Data Found
-        </Text>
+        <Text style={[styles.text, { color: color.backgroundColor }]}>No Data Found</Text>
       </View>
     );
   };
@@ -70,11 +59,7 @@ export default function CartUi() {
         />
         <Text style={styles.title}>Cart</Text>
       </View>
-      <FlatList
-        data={cartItems}
-        renderItem={renderData}
-        ListEmptyComponent={listEmpty}
-      />
+      <FlatList data={cartItems} renderItem={renderData} ListEmptyComponent={listEmpty} />
     </View>
   );
 }
@@ -82,7 +67,6 @@ export default function CartUi() {
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    backgroundColor: "white",
   },
   title: {
     fontSize: 30,
@@ -94,6 +78,7 @@ const styles = StyleSheet.create({
     backgroundColor: "salmon",
     flexDirection: "row",
     alignItems: "center",
+    padding: 10,
   },
   main1: {
     alignItems: "center",

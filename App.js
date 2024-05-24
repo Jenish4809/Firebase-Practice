@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import store from "./app/ReduxApp/redux/store";
 import CartUi from "./app/ReduxApp/CartUi";
 import Video1 from "./app/Video/Video1";
+import AudioPlay from "./app/AudioPlay/AudioPlay";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -12,6 +13,7 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator>
+          <Stack.Screen name="AudioPlay" component={AudioPlay} />
           <Stack.Screen name="Video1" component={Video1} />
           <Stack.Screen name="ReduxApp" component={ReduxApp} />
           <Stack.Screen name="CartUi" component={CartUi} />
