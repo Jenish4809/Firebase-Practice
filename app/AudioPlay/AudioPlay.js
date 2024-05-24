@@ -1,10 +1,11 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Audio } from "expo-av";
 import Slider from "@react-native-community/slider";
+import { MaterialIcons } from "@expo/vector-icons";
 
-export default function AudioPlay() {
+export default function AudioPlay({ navigation }) {
   const color = useSelector((state) => state.theme.theme);
   const [sound, setSound] = useState();
   const [isPlaying, setIsPlaying] = useState(false);
@@ -66,28 +67,38 @@ export default function AudioPlay() {
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   }
 
+  // function for navigate to the video
+  const onPressNavigate = () => {
+    navigation.navigate("Video1");
+  };
+
   return (
     <View style={[styles.main, { backgroundColor: color.backgroundColor }]}>
-      <Text style={styles.title}>AudioPlay</Text>
-      <View style={styles.innerview}>
-        <View style={styles.durationContainer}>
-          <Text style={styles.durationText}>{formatTime(position)} / </Text>
-          <Text style={styles.durationText}>{formatTime(duration)}</Text>
+      <ImageBackground source={require("../assets/guitar.jpeg")} style={styles.backgroundImage}>
+        <View style={styles.innerview}>
+          <TouchableOpacity onPress={playSound}>
+            <MaterialIcons name={isPlaying ? "pause" : "play-arrow"} size={50} color={"#000"} />
+          </TouchableOpacity>
+          <View style={styles.durationContainer}>
+            <Text style={styles.durationText}>{formatTime(position)} / </Text>
+            <Text style={styles.durationText}>{formatTime(duration)}</Text>
+          </View>
+
+          <Slider
+            style={{ width: "80%" }}
+            value={position}
+            maximumValue={duration}
+            minimumTrackTintColor="#fff"
+            maximumTrackTintColor="#000000"
+            thumbTintColor="#000000"
+            onSlidingComplete={onSeek}
+            disabled={!sound}
+          />
         </View>
-        <Slider
-          style={{ width: "80%" }}
-          value={position}
-          maximumValue={duration}
-          minimumTrackTintColor={color.GrayScale}
-          maximumTrackTintColor="#d6c5c5"
-          thumbTintColor={color.GrayScale}
-          onSlidingComplete={onSeek}
-          disabled={!sound}
-        />
-        <TouchableOpacity style={styles.button} onPress={playSound}>
-          <Text style={{ fontSize: 20, fontWeight: "500" }}>{isPlaying ? "Pause Sound" : "Play Sound"}</Text>
+        <TouchableOpacity style={styles.btn} onPress={onPressNavigate}>
+          <Text style={styles.nextbtn}>Go to The Video</Text>
         </TouchableOpacity>
-      </View>
+      </ImageBackground>
     </View>
   );
 }
@@ -96,30 +107,37 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
   },
-  title: {
-    fontSize: 30,
-    textAlign: "center",
-  },
   innerview: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
-  button: {
-    backgroundColor: "skyblue",
-    padding: 20,
-    borderRadius: 10,
-    margin: 10,
-    alignItems: "center",
-    width: 200,
-    alignSelf: "center",
-  },
+
   durationContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     marginTop: 10,
   },
   durationText: {
-    fontSize: 16,
+    fontSize: 20,
+    color: "#fff",
+    fontWeight: "bold",
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
+  },
+  btn: {
+    marginBottom: 20,
+    marginHorizontal: 50,
+  },
+  nextbtn: {
+    fontSize: 20,
+    color: "#fff",
+    fontWeight: "bold",
+    backgroundColor: "#000",
+    padding: 10,
+    textAlign: "center",
   },
 });

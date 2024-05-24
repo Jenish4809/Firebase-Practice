@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   content: {
+    width: "100%",
     position: "absolute",
     justifyContent: "center",
     alignItems: "center",
@@ -120,15 +121,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     gap: 25,
+    bottom: 30,
   },
   slider: {
-    width: "100%",
+    width: "90%",
   },
   timer: {
     flexDirection: "row",
     width: "100%",
-    marginTop: 10,
-    marginLeft: 20,
+    marginLeft: 30,
   },
 
   mute: {
