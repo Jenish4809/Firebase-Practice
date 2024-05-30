@@ -5,6 +5,7 @@ import { colors } from "../Colors";
 import { THEME } from "./utils/keys";
 import { setAsyncStorageData } from "./utils/helper";
 import { changeThemeAction } from "./redux/themeAction";
+import CSafeAreaView from "../CSafeAreaView";
 
 export default function CartUi() {
   const cartItems = useSelector((state) => state.reducer);
@@ -48,25 +49,31 @@ export default function CartUi() {
     );
   };
   return (
-    <View style={[styles.main, { backgroundColor: color.backgroundColor }]}>
-      <View style={styles.innerview}>
-        <Switch
-          trackColor={{ false: color.darkgray, true: color.input }}
-          thumbColor={color.purple}
-          onValueChange={toggleSwitch}
-          value={isEnable}
-          style={styles.switch}
-        />
-        <Text style={styles.title}>Cart</Text>
+    <CSafeAreaView contentContainerStyle={styles.container}>
+      <View style={[styles.main, { backgroundColor: color.backgroundColor }]}>
+        <View style={styles.innerview}>
+          <Switch
+            trackColor={{ false: color.darkgray, true: color.input }}
+            thumbColor={color.purple}
+            onValueChange={toggleSwitch}
+            value={isEnable}
+            style={styles.switch}
+          />
+          <Text style={styles.title}>Cart</Text>
+        </View>
+        <FlatList data={cartItems} renderItem={renderData} ListEmptyComponent={listEmpty} />
       </View>
-      <FlatList data={cartItems} renderItem={renderData} ListEmptyComponent={listEmpty} />
-    </View>
+    </CSafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   main: {
     flex: 1,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
   },
   title: {
     fontSize: 30,

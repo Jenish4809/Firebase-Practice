@@ -9,7 +9,7 @@ const LightColor = {
 };
 
 const Common = {
-  primary: "#9610ff",
+  primary: "#9610FF",
 };
 
 const DarkColor = {

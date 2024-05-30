@@ -11,9 +11,12 @@ export default function Video1({ navigation }) {
   const [isMuted, setIsMuted] = useState(false);
   const color = useSelector((state) => state.theme.theme);
 
+  // onPressNext function for navigate to ReduxApp
   const onPressNext = () => {
     navigation.navigate("ReduxApp");
   };
+
+  // formatTime function for format the time
   const formatTime = (millis) => {
     if (!millis) return "00:00:00";
     const date = new Date(millis);
@@ -23,6 +26,7 @@ export default function Video1({ navigation }) {
     return `${hours}:${minutes}:${seconds}`;
   };
 
+  // handlePlayPause function for play and pause the video
   const handlePlayPause = () => {
     if (status.isPlaying) {
       videoRef.current.pauseAsync();
@@ -31,18 +35,23 @@ export default function Video1({ navigation }) {
     }
   };
 
+  // handleForward function for forward the video
   const handleForward = () => {
     videoRef.current.setPositionAsync(status.positionMillis + 10000); // Forward 10 seconds
   };
 
+  // handleBackward function for backward the video
   const handleBackward = () => {
     videoRef.current.setPositionAsync(status.positionMillis - 10000); // Backward 10 seconds
   };
 
+  // handleMuteUnmute function for mute and unmute the video
   const handleMuteUnmute = () => {
     videoRef.current.setIsMutedAsync(!isMuted);
     setIsMuted(!isMuted);
   };
+
+  // handleSliderValueChange function for change the slider value
   const handleSliderValueChange = (value) => {
     videoRef.current.setPositionAsync(value);
   };
